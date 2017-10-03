@@ -1,0 +1,100 @@
+body,
+html {
+  height: 100%; }
+
+.dark-wrapper {
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  position: absolute; }
+
+.dark-wrapper1 {
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%; }
+
+.light-wrapper {
+  background: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: 100%; }
+
+.pimg1,
+.pimg2,
+.pimg3 {
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: block;
+  background-attachment: fixed; }
+  .pimg1 span,
+  .pimg2 span,
+  .pimg3 span {
+    margin: 0;
+    padding: 0;
+    font-size: 28pt; }
+  .pimg1 p,
+  .pimg2 p,
+  .pimg3 p {
+    margin: 5px; }
+  .pimg1 .btn,
+  .pimg2 .btn,
+  .pimg3 .btn {
+    margin: 10px; }
+
+.pimg1 {
+  background-image: url("../assets/home.jpeg");
+  min-height: 100%; }
+
+.pimg2 {
+  background-image: url("../assets/bg-madurai.jpeg");
+  min-height: 100%;
+  color: #000; }
+
+.pimg3 {
+  background-image: url("../assets/thirivalluvar.jpg");
+  min-height: 100%;
+  color: #fff; }
+  .pimg3 p {
+    margin: 5px;
+    color: #fff; }
+
+.section {
+  text-align: center;
+  padding: 50px 80px; }
+
+.section-light {
+  background-color: #f4f4f4;
+  color: #666; }
+
+.section-dark {
+  background-color: #282e34;
+  color: #ddd; }
+
+.ptext {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: 'Baloo Thambi'; }
+
+.ptext .border {
+  background-color: #111;
+  color: #fff;
+  padding: 20px; }
+
+.ptext .border.trans {
+  background-color: transparent; }
+
+@media (max-width: 568px) {
+  .pimg1,
+  .pimg2,
+  .pimg3 {
+    background-attachment: scroll; }
+  .ptext {
+    top: 10%; } }
+
+.features-2 {
+  padding: 5rem 0;
+  position: relative; }
