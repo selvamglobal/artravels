@@ -1,9 +1,10 @@
 body,
 html {
-  height: 100%; }
+  height: 100%;
+  font-family: 'Roboto', sans-serif; }
 
 .dark-wrapper {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(1, 15, 59, 0.8);
   width: 100%;
   height: 100%;
   position: absolute; }
@@ -76,8 +77,7 @@ html {
   top: 40%;
   width: 100%;
   text-align: center;
-  color: #fff;
-  font-family: 'Baloo Thambi'; }
+  color: #fff; }
 
 .ptext .border {
   background-color: #111;
@@ -98,3 +98,414 @@ html {
 .features-2 {
   padding: 5rem 0;
   position: relative; }
+
+/* Seat Selection */
+.seat_sel_tableINNER {
+  /*behavior: url(Scripts/border-radius.htc);*/
+  height: auto;
+  width: auto;
+  min-width: 300px;
+  max-width: 460px;
+  display: block;
+  float: left;
+  border: 1px solid #CCC;
+  /*background-position: left top;
+	background-repeat: no-repeat;*/
+  background-position: -10px top;
+  background-repeat: repeat-y;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  /*-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	border-radius: 10px;*/
+  text-decoration: none;
+  background-color: #FFF;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  background-image: url(../assets/sterring_bg.png); }
+
+#booked_members .book_box_gender {
+  text-align: left; }
+
+#Rbooked_members .book_box_gender {
+  text-align: left; }
+
+.seat_sel_tableINNER_bg {
+  margin-top: 20px;
+  vertical-align: top;
+  border: 0px solid #CCC; }
+
+.seat_sel_tableINNER div.seat_box {
+  display: block;
+  margin: 0px;
+  float: left;
+  position: relative;
+  padding-top: 1px;
+  padding-left: 50px;
+  left: 0px;
+  top: 0px;
+  background-image: url(../assets/sterring.png);
+  background-repeat: no-repeat;
+  background-position: -142px -5px; }
+
+/*.seat_sel_tableINNER div.seat_box_Lower { background-position: -80px -92px; }*/
+.seat_sel_tableINNER div.seat_box_Lower {
+  background-position: -78px -102px; }
+
+.seat_sel_tableINNER div.seat_box_upper {
+  background-position: -10px -192px; }
+
+.seat_sel_tableINNER_bg div.hint_box, .seat_sel_tableINNER_bg div.bed_hint_box {
+  display: block;
+  position: relative;
+  float: left;
+  margin-top: 10px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px; }
+
+.seat_sel_tableINNER_bg div.hint_box span {
+  background-image: url(../assets/seat_hint.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  height: 31px;
+  width: 409px;
+  display: block; }
+
+.seat_sel_tableINNER_bg div.bed_hint_box span {
+  background-image: url(../assets/bed_hint.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  height: 50px;
+  width: 250px;
+  display: block; }
+
+#list2 {
+  background-color: #900;
+  border-top-style: none;
+  border-right-style: none;
+  border-bottom-style: none;
+  border-left-style: none; }
+
+.seat_sel_tableINNER ul {
+  float: left;
+  position: relative;
+  top: 0px;
+  margin: 0px;
+  width: auto;
+  padding-top: 0px;
+  left: 0px;
+  clear: both; }
+
+.seat_sel_tableINNER ul li {
+  list-style: none;
+  display: inline;
+  float: left;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 1px;
+  padding-right: 1px;
+  width: auto;
+  clear: right;
+  margin-right: 0px; }
+
+.seat_sel_tableINNER ul li a {
+  background-image: url(../assets/seat_img.PNG);
+  background-repeat: no-repeat;
+  height: 31px;
+  width: auto;
+  text-indent: -99999px;
+  text-decoration: none;
+  display: inline;
+  float: left;
+  color: #FFF; }
+
+.bed_sel_tableINNER ul li a {
+  background-image: url(../assets/bed_img.png) !important;
+  background-repeat: no-repeat;
+  height: 23px !important; }
+
+.bed_sel_tableINNER_c ul li a {
+  background-image: url(../assets/bed_img.png) !important;
+  background-repeat: no-repeat;
+  height: 23px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a {
+  height: 43px !important; }
+
+.bed_sel_tableINNER ul li div {
+  width: 45px !important; }
+
+.seat_sel_tableINNER ul li div {
+  font-size: 9px;
+  font-weight: normal;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  font-family: Verdana, Geneva, sans-serif;
+  position: relative;
+  left: 0px;
+  top: 0px;
+  margin-top: 0px;
+  width: 26px; }
+
+/* Seat Available */
+.bed_sel_tableINNER ul li a.seat_available {
+  background-position: right 2px !important;
+  width: 45px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_available {
+  background-position: left top !important;
+  cursor: default;
+  width: 23px !important;
+  height: 43px !important; }
+
+.bed_sel_tableINNER_c ul li a.seat_available {
+  background-position: left top !important;
+  cursor: default;
+  width: 23px !important;
+  height: 43px !important; }
+
+.seat_sel_tableINNER ul li a.seat_available {
+  background-position: left top;
+  width: 26px; }
+
+/* Male Available */
+.bed_sel_tableINNER ul li a.seat_male_available {
+  background-position: right 2px !important;
+  width: 45px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_male_available {
+  background-position: left top !important;
+  cursor: default;
+  width: 23px !important;
+  height: 43px !important; }
+
+.bed_sel_tableINNER_c ul li a.seat_male_available {
+  background-position: left top !important;
+  cursor: default;
+  width: 23px !important;
+  height: 43px !important; }
+
+.seat_sel_tableINNER ul li a.seat_male_available {
+  background-position: left top;
+  width: 26px; }
+
+/* Female Available */
+.bed_sel_tableINNER ul li a.seat_fem_available {
+  background-position: right -92px !important;
+  cursor: default;
+  width: 45px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_fem_available {
+  background-position: left -87px !important;
+  cursor: default;
+  width: 23px !important; }
+
+.bed_sel_tableINNER_c ul li a.seat_fem_available {
+  background-position: left -87px !important;
+  cursor: default;
+  width: 23px !important;
+  height: 43px !important; }
+
+.seat_sel_tableINNER ul li a.seat_fem_available {
+  background-position: left -90px;
+  cursor: default;
+  width: 26px; }
+
+/* Female Selected */
+.seat_sel_tableINNER ul li a.seat_bookfemale {
+  background-position: left -60px;
+  width: 26px; }
+
+.bed_sel_tableINNER ul li a.seat_bookfemale {
+  background-position: right -60px !important;
+  width: 45px !important; }
+
+.bed_sel_tableINNER_c ul li a.seat_bookfemale {
+  background-position: left -90px !important;
+  width: 23px !important;
+  height: 43px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_bookfemale {
+  background-position: left -90px !important;
+  width: 23px !important; }
+
+/* Seat Blocked */
+.bed_sel_tableINNER ul li a.seat_blocked {
+  background-position: right -23px !important;
+  width: 45px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_blocked {
+  background-position: -22px -44px !important;
+  cursor: default;
+  width: 23px !important; }
+
+.seat_sel_tableINNER ul li a.seat_blocked {
+  background-position: left -150px;
+  width: 26px; }
+
+/* Seat Selected */
+.bed_sel_tableINNER ul li a.seat_bookmale {
+  background-position: right -45px !important;
+  width: 45px !important; }
+
+.seat_sel_tableINNER ul li a.seat_bookmale {
+  background-position: left -30px;
+  width: 26px; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_bookmale {
+  background-position: left -43px !important;
+  width: 23px !important; }
+
+.bed_sel_tableINNER_c ul li a.seat_bookmale {
+  background-position: left -43px !important;
+  width: 23px !important;
+  height: 43px !important; }
+
+/* Female Reserved */
+.bed_sel_tableINNER ul li a.seat_fem_reserved {
+  background-position: right -69px !important;
+  cursor: default;
+  width: 45px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_fem_reserved {
+  background-position: -22px -87px !important;
+  cursor: default;
+  width: 23px !important; }
+
+.bed_sel_tableINNER_c ul li a.seat_fem_reserved {
+  background-position: -23px -88px !important;
+  cursor: default;
+  width: 23px !important;
+  height: 43px !important; }
+
+.seat_sel_tableINNER ul li a.seat_fem_reserved {
+  background-position: left -120px;
+  cursor: default;
+  width: 26px; }
+
+/* Male Reserved */
+.bed_sel_tableINNER ul li a.seat_male_reserved {
+  background-position: right -69px !important;
+  cursor: default;
+  width: 45px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_male_reserved {
+  background-position: -22px -87px !important;
+  cursor: default;
+  width: 23px !important; }
+
+.bed_sel_tableINNER_c ul li a.seat_male_reserved {
+  background-position: -23px -88px !important;
+  cursor: default;
+  width: 23px !important;
+  height: 43px !important; }
+
+.seat_sel_tableINNER ul li a.seat_male_reserved {
+  background-position: left -120px;
+  cursor: default;
+  width: 26px; }
+
+/* Seat Reserved */
+.bed_sel_tableINNER ul li a.seat_reserved {
+  background-position: right -69px !important;
+  cursor: default;
+  width: 45px !important; }
+
+.bed_sel_tableINNER div.extra1 ul li a.seat_reserved {
+  background-position: -22px -87px !important;
+  cursor: default;
+  width: 23px !important; }
+
+.bed_sel_tableINNER_c ul li a.seat_reserved {
+  background-position: -23px -88px !important;
+  cursor: default;
+  width: 23px !important;
+  height: 43px !important; }
+
+.seat_sel_tableINNER ul li a.seat_reserved {
+  background-position: left -120px;
+  cursor: default;
+  width: 26px; }
+
+.bed_sel_tableINNER ul li a.seat_blank {
+  background-position: left -200px;
+  width: 45px !important;
+  cursor: default; }
+
+.bed_sel_tableINNER_c ul li a.seat_blank {
+  background-position: left -200px;
+  width: 23px !important;
+  cursor: default; }
+
+.seat_sel_tableINNER ul li a.seat_blank {
+  background-position: left -200px;
+  width: 26px;
+  cursor: default; }
+
+.seat_sel_tableINNER ul li a.seat_hide {
+  display: none;
+  /*background-position: left -200px;*/ }
+
+#RA {
+  position: relative;
+  display: block;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  bottom: 0px; }
+
+#RB {
+  position: relative;
+  top: 0px;
+  margin-top: 0px;
+  padding-top: 2px;
+  display: block;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  visibility: visible; }
+
+#LC {
+  position: relative;
+  bottom: 0px;
+  margin-bottom: 2px;
+  padding-bottom: 2px;
+  margin-top: 0px;
+  padding-top: 2px; }
+
+#LD {
+  position: relative;
+  margin-top: 0px;
+  padding-top: 0px; }
+
+.seat_sel_tableINNER ul li a div {
+  background-color: #FFF;
+  display: block;
+  float: left;
+  height: 31px;
+  width: 96px;
+  position: relative;
+  white-space: normal;
+  border: 1px solid #CCC;
+  z-index: 9999;
+  padding: 1px;
+  -moz-box-shadow: 0px 0px 4px #999;
+  -webkit-box-shadow: 0px 0px 4px #999;
+  box-shadow: 0px 0px 4px #999;
+  /* For IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#999')";
+  /* For IE 5.5 - 7 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=135, Color='#3A3A3A'); }
+
+.seat_sel_tableINNER ul li a div a {
+  margin-left: 1px;
+  position: relative;
+  padding-top: 0px;
+  top: 0px;
+  padding-right: 2px;
+  padding-left: 2px; }

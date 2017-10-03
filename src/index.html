@@ -6,11 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="The website of Dr.Sankara Narayanan. Learn about Sankara Narayanan Education, Work Experience, Puplic Works and Latest news.">
+    <meta name="description" content="Book Bus tickets easily online.">
     <link href="https://fonts.googleapis.com/css?family=Faster+One|Roboto:300,400" rel="stylesheet">
     <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 </head>
 
@@ -48,6 +48,7 @@
             <div class="ptext">
                 <div class="cover-container pb-5">
                     <div class="cover-inner container" style="max-width:600px;">
+                            <h1 class="jumbotron-heading reveal-top">Book your tickets!</h1>
                         <form class="text-left reveal-top">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -81,7 +82,8 @@
 
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Book Ticket</button>
+                           <a href="seat-select.html" class="btn btn-primary">Book Ticket   
+                           </a>
                         </form>
                     </div>
                 </div>
@@ -95,7 +97,7 @@
             <div class="divider"></div>
             <div class="row contact-details">
                 <div class="col-lg-6 text-center reveal-left">
-                    <img class="mb-5 img-fluid" src="../assets/home.jpeg">
+                    <img class="mb-5 img-fluid" src="assets/home.jpeg">
                 </div>
                 <div class="col-lg-6 text-left text-lg-left mb-4 reveal-right">
                     <p class="lead mt-0 mb-2">Please feel free to contact us!</p>
@@ -118,6 +120,9 @@
         </div>
     </section>
     <footer class="footer-3 bg-light">
+            <div class="container-fluid bg-dark">
+                     <div class="col text-white text-center pt-2 pb-2">Home About us Terms and Conditions Privacy Policy FAQ Why KPN? Gallery Contact us</div>
+                </div>
 
         <div class="container-fluid">
             <div class="divider"></div>
@@ -125,58 +130,20 @@
         <div class="container">
            
             <div class="row">
-                <div class="col-md-6 text-center text-md-left mt-2  pt-1">
+                <div class="col-md-6 text-center text-md-left mt-2  pt-2">
                     <p>Copy Rights All rights reserved.
                     </p>
                 </div>
-                <div class="col-md-6 text-center text-md-right mt-2 ">
+                <div class="col-md-6 text-center text-md-right mt-2 pt-2">
                     <p> Site Designed and developed by <a target="_blank" href="http://selvam.co.in">selvam</a> </p>
                 </div>
             </div>
         </div>
     </footer>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/tether.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-
-    <script>
-        window.sr = ScrollReveal();
-        sr.reveal('.reveal-top', {
-            duration: 2000, distance: '100px',
-            origin: 'top'
-        });
-        sr.reveal('.reveal-bottom', {
-            duration: 2000, distance: '100px',
-            origin: 'bottom'
-        });
-        sr.reveal('.reveal-left', {
-            duration: 2000, distance: '100px',
-            origin: 'left'
-
-        });
-        sr.reveal('.reveal-right', {
-            duration: 2000, distance: '100px',
-            origin: 'right'
-        });
-    </script>
-
-    <script>
-        $(function () {
-            // Smooth Scrolling
-            $('a[href*="#"]:not([href="#"])').click(function () {
-                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-                    var target = $(this.hash);
-                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                    if (target.length) {
-                        $('html, body').animate({
-                            scrollTop: target.offset().top
-                        }, 1000);
-                        return false;
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+ 
 </body>
 
 </html>
