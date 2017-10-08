@@ -1,10 +1,17 @@
 <?php
 session_start();
 if(!isset($_GET['id'])){
-	header("Location: http://www.artravels.in");
+	header("Location: http://www.arttravels.in");
 exit;	
 }
-$rdir = base64_decode($_GET['id']);
+$id = explode("&",base64_decode($_GET['id'])); //3&2017-10-04&maxseat&fare&rdate
+$request_url = $_SERVER['HTTP_REFERER'];
+if(count($id)<4 || !strpos($request_url,"arttravels")){
+	header("Location: http://www.arttravels.in");
+exit;
+}
+include_once('admin/includes/connection.php');
+$pdo_connection = Connection::dbConnection();
 ?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -14,11 +21,12 @@ $rdir = base64_decode($_GET['id']);
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="TBook Bus tickets easily online.">
+    <meta name="description" content="">
     <link href="https://fonts.googleapis.com/css?family=Faster+One|Roboto:300,400" rel="stylesheet">
     <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/jquery.js"></script> <!-- seat -->
     <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 </head>
 
@@ -52,35 +60,215 @@ $rdir = base64_decode($_GET['id']);
     </nav>
  <div class="row">
  <script> 
- 
  $(document).ready(function(){
 	var fruits = [];
-	var amount = 400;
-	$(".seat_box_Lower").click(function(){
-		
+	var amount = <?php echo $id[3];?>;
+	$(".seat").click(function(){
+	 var total_class = $('.green').length;
+	 var book_seat = $(this).attr("data-book"); 
+	 var current_book = $(this).attr("data-current"); 
+	 if(current_book == 1 ){	
+	 var seat_no = $(this).attr("data-number");
+		$(this).removeClass('green');	
+		$(this).removeAttr('data-current');		
+		fruits.splice( fruits.indexOf(seat_no), 1 );
+		$(".book_seats").val(fruits);	
+		$(".amount").val( fruits.length * amount );
+		$("#base_fare").html(parseFloat(fruits.length * amount).toFixed(2));
+		$("#gst").html(parseFloat(parseFloat(fruits.length * amount)*parseFloat($("#gstval").val())/100).toFixed(2));
+		$("#total_fare").html(parseFloat(parseFloat(fruits.length * amount)+parseFloat($("#gst").html())).toFixed(2));
+		$("#seattbl_"+seat_no).remove();
+		return true;
+	 }	  
+	else if(book_seat == 1){	
+		alert("Already booked");
+		return false;
+	}	
+	else if(total_class < 5){ 	
+		var seat_no = $(this).attr("data-number");
+        fruits.push(seat_no);
+		$(".book_seats").val(fruits);
+		$(".amount").val( fruits.length * amount );
+		$(this).attr('data-current', '1');
+		$(this).addClass('green');	
+		$("#base_fare").html(parseFloat(fruits.length * amount).toFixed(2));
+		$("#gst").html(parseFloat(parseFloat(fruits.length * amount)*parseFloat($("#gstval").val())/100).toFixed(2));
+		$("#total_fare").html(parseFloat(parseFloat(fruits.length * amount)+parseFloat($("#gst").html())).toFixed(2));
+		$("#seat_info").append('<table class="table" id="seattbl_'+seat_no+'"><tr><td style="width:80px;">'+seat_no+'</td><td style="width:230px;"><input type="text" name="name[]"  placeholder="Name" /></td><td><select name="gender[]"><option value="1">Male</option><option value="2">Female</option></select></td></tr></table>');
+		return true;
+	}
+	else if(total_class >= 5){ 
+		alert("Maximum 5 seats only")
+		return false;
+	}	
 	});
- });
- </script>
-     <div class="col-md-6 seat_sel_tableINNER_bg"> <div id="seat_sel_tableINNER" class="seat_sel_tableINNER bed_sel_tableINNER" style="display:Block;">
-            <div id="Seat_Box_L1" class="seat_box seat_box_Lower">
-            <ul id="L4">
-            <li id="L424"><a href="#" id="LS42" id_title="# L4" class="seat_male_reserved" st_noid="L4" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L4"></a></li>
-            <li id="L444"><a href="#" id="LS44" id_title="# L8" class="seat_available" st_noid="L8" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li>
-            <li id="L464"><a href="#" id="LS46" id_title="# L12" class="seat_available" st_noid="L12" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L12"></a></li>
-            <li id="L484"><a href="#" id="LS48" id_title="# L16" class="seat_available" st_noid="L16" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L16"></a></li>
-            <li id="L4104"><a href="#" id="LS410" id_title="# L20" class="seat_available" st_noid="L20" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li>
-            <li id="L4124"><a href="#" id="LS412" id_title="# L36" class="seat_available" st_noid="L36" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L36"></a></li>
-            </ul>
-            
-            <ul id="L3"><li id="L323"><a href="#" id="LS32" id_title="# L3" class="seat_male_reserved" st_noid="L3" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L3"></a></li><li id="L343"><a href="#" id="LS34" id_title="# L7" class="seat_available" st_noid="L7" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L363"><a href="#" id="LS36" id_title="# L11" class="seat_available" st_noid="L11" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L11"></a></li><li id="L383"><a href="#" id="LS38" id_title="# L15" class="seat_available" st_noid="L15" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L3103"><a href="#" id="LS310" id_title="# L19" class="seat_available" st_noid="L19" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L3123"><a href="#" id="LS312" id_title="# L35" class="seat_available" st_noid="L35" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li></ul><ul id="L2"><li id="L222"><a href="#" id="LS22" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L242"><a href="#" id="LS24" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L262"><a href="#" id="LS26" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L282"><a href="#" id="LS28" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L2102"><a href="#" id="LS210" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L2122"><a href="#" id="LS212" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li></ul><ul id="L1"><li id="L121"><a href="#" id="LS12" id_title="# L22" class="seat_male_reserved" st_noid="L22" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L22"></a></li><li id="L141"><a href="#" id="LS14" id_title="# L24" class="seat_available" st_noid="L24" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L161"><a href="#" id="LS16" id_title="# L26" class="seat_available" st_noid="L26" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L26"></a></li><li id="L181"><a href="#" id="LS18" id_title="# L28" class="seat_available" st_noid="L28" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# L28"></a></li><li id="L1101"><a href="#" id="LS110" id_title="# L30" class="seat_available" st_noid="L30" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L1121"><a href="#" id="LS112" id_title="# L34" class="seat_available" st_noid="L34" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li></ul></div>
-        </div>
-        <div id="seat_sel_tableINNER2" class="seat_sel_tableINNER bed_sel_tableINNER" style="display:Block;">
-            <div id="Seat_Box_L2" class="seat_box seat_box_upper"><ul id="L4"><li id="L414"><a href="#" id="LS41" id_title="# U2" class="seat_available" st_noid="U2" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L434"><a href="#" id="LS43" id_title="# U6" class="seat_available" st_noid="U6" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L454"><a href="#" id="LS45" id_title="# U10" class="seat_available" st_noid="U10" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# U10"></a></li><li id="L474"><a href="#" id="LS47" id_title="# U14" class="seat_available" st_noid="U14" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L494"><a href="#" id="LS49" id_title="# U18" class="seat_available" st_noid="U18" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L4114"><a href="#" id="LS411" id_title="# U33" class="seat_available" st_noid="U33" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li></ul><ul id="L3"><li id="L313"><a href="#" id="LS31" id_title="# U1" class="seat_available" st_noid="U1" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L333"><a href="#" id="LS33" id_title="# U5" class="seat_available" st_noid="U5" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# U5"></a></li><li id="L353"><a href="#" id="LS35" id_title="# U9" class="seat_available" st_noid="U9" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L373"><a href="#" id="LS37" id_title="# U13" class="seat_available" st_noid="U13" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L393"><a href="#" id="LS39" id_title="# U17" class="seat_available" st_noid="U17" runat="server" basefare="770" tax="39" traveler_name="" fare="809" original-title="# U17"></a></li><li id="L3113"><a href="#" id="LS311" id_title="# U32" class="seat_available" st_noid="U32" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li></ul><ul id="L2"><li id="L212"><a href="#" id="LS21" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L232"><a href="#" id="LS23" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L252"><a href="#" id="LS25" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L272"><a href="#" id="LS27" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L292"><a href="#" id="LS29" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L2112"><a href="#" id="LS211" id_title="# P" class="seat_blank" st_noid="P" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li></ul><ul id="L1"><li id="L111"><a href="#" id="LS11" id_title="# U21" class="seat_available" st_noid="U21" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L131"><a href="#" id="LS13" id_title="# U23" class="seat_available" st_noid="U23" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L151"><a href="#" id="LS15" id_title="# U25" class="seat_available" st_noid="U25" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L171"><a href="#" id="LS17" id_title="# U27" class="seat_available" st_noid="U27" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L191"><a href="#" id="LS19" id_title="# U29" class="seat_available" st_noid="U29" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li><li id="L1111"><a href="#" id="LS111" id_title="# U31" class="seat_available" st_noid="U31" runat="server" basefare="770" tax="39" traveler_name="" fare="809"></a></li></ul></div>
-        </div>
-        <div id="seat_hint" class="bed_hint_box"> <span></span><!--<img src="images/seat_hint.png"/>--></div></div>
+});
+</script>
+<style>
+.bus{float:left;min-height:150px;padding:0  0 10px 10px ;margin-left:30px; }
+.seat{background:#CCC;float:left;margin:10px 10px 0 0;cursor:pointer;padding:4;}
+.cancel_book{background:#CCC;}
+.green{background:green;}
+.red{background:red;}
+#base_fare, #gst, #total_fare{text-align:right}
+</style> 
+ <div class="bus">
+		<?php
+		$mrows = Connection::sqlSelect($pdo_connection,"SELECT bd.seat_no, bd.tot_seats FROM route r INNER JOIN booking_details bd ON r.id = bd.route_id WHERE bd.travel_date='".$id[1]."' AND r.id=".$id[0]);
+		//echo "SELECT bd.seat_no, bd.tot_seats, b.max_seats FROM route r INNER JOIN bus b ON r.bus_id = b.bus_id LEFT OUTER JOIN booking_details bd ON r.id = bd.route_id WHERE bd.travel_date='".$id[1]."' AND r.id=".$id[0];
+		$booked_seat=array();
+		$max_seats = $id[2];
+		
+		if(count($mrows)>0){
+										foreach($mrows as $rows){
+											$sno = explode(",",$rows->seat_no);
+											for($i=0;$i<count($sno);$i++){
+												$booked_seat[] = $sno[$i];
+											}											
+											
+										}
+		}
+		$lower = array("3","6","9","12","15","18");
+		$upper = array("21","24","27","30","33","36");
+		 for($seat= 1; $seat <=$max_seats ;$seat++) { 
+			if(in_array($seat,$booked_seat)){ $booked="red"; $book_seat="data-book='1'"; }
+			else { $booked=""; $book_seat="";}
+			if($seat<=18){
+				if($seat==1){
+					echo '<div style="float:left;border:1px solid #CCC;width:180px;padding:20px;margin-bottom:20px;padding-top:50px;background:url(images/lower.png) center top no-repeat;">';	
+				}
+				if(in_array($seat,$lower)){ $lpad="width:50px;"; }
+				else{$lpad="width:40px;";}
+				echo '<div style="'.$lpad.'  float:right;">';
+				echo "<div class='seat $booked' data-number='$seat' $book_seat style='width:30px;'><img src='images/seat_pos.png' width='20' height='42' title=".$seat."></div>";
+				echo '</div>';
+				if($seat==18){
+					echo '</div>';	
+				}
+			}
+			else{
+				if($seat==19){
+					echo '<div style="float:left;border:1px solid #CCC;width:180px;padding:20px;padding-top:50px;background:url(images/upper.png) center top no-repeat;">';		
+				}
+				if(in_array($seat,$upper)){ $lpad="width:50px;"; }
+				else{$lpad="width:40px;";}
+				echo '<div style="'.$lpad.'  float:right;">';
+				echo "<div class='seat $booked' data-number='$seat' $book_seat style='width:30px;'><img src='images/seat_pos.png' width='20' height='42' title=".$seat."></div>";
+				echo '</div>';
+				if($seat==$max_seats){
+					echo '</div>';	
+				}
+			}
+			
+			
+		 } ?>
+	</div>
+	
+     
      <div class="col-md-6"></div>
  </div>
+ <form name="frmBooking" id="frmBooking" enctype="multipart/form-data">
+<div class="container">
+	<div class="row">
+    	<div class="col-lg-6">
+        <table class="table table-sm">
+         <?php
+		 $gst = 0;$route_id=0;
+		$tdate = explode("-",$id[1]);
+								$mrows = Connection::sqlSelect($pdo_connection,"SELECT r.*, b.bus_name, b.bus_type FROM bus b INNER JOIN route r ON b.id=r.bus_id WHERE r.id=".$id[0]);
+								if(count($mrows)>0){
+										foreach($mrows as $rows){
+											echo '
+											<tr><th colspan="2">BOOKING SUMMARY</th></tr>
+                <tr>
+                	<td>From</td><th>'.$rows->board_point.'</th>
+                </tr>
+                <tr>
+                	<td>To.</td><th>'.$rows->drop_point.'</th>
+                </tr>
+                <tr>
+                	<td>Date</td><th>'.$tdate[2]."/".$tdate[1]."/".$tdate[0].' '.$rows->board_time.'</th>
+                </tr>
+                <tr>
+                	<td>Bus Type</td><th>'.$rows->bus_name.' - '.$rows->bus_type.' - '.$id[2].'</th>
+                </tr>
+											';
+											$gst = $rows->gst;
+											$route_id = $rows->id;
+										}
+								}
+								?>
+            	
+                <tr>
+                	<td colspan="2">
+                    	<select name="board_point_id">
+                        	<option> - Boarding Point - </option>
+                            <?php
+								$mrows = Connection::sqlSelect($pdo_connection,"SELECT bp.* FROM board_points bp INNER JOIN bus b ON bp.bus_id=b.id INNER JOIN route r ON b.id=r.bus_id WHERE r.id=".$id[0]);
+								if(count($mrows)>0){
+										foreach($mrows as $rows){
+											echo '<option value="'.$rows->id.'">'.$rows->pickup_point.' ('.$rows->pickup_time.')</option>';
+										}
+								}
+											
+							?>
+                        </select>
+                   
+                    	<select name="drop_point_id">
+                        	<option> - Drop Point - </option>
+                            <?php
+								$mrows = Connection::sqlSelect($pdo_connection,"SELECT bp.* FROM drop_points bp INNER JOIN bus b ON bp.bus_id=b.id INNER JOIN route r ON b.id=r.bus_id WHERE r.id=".$id[0]);
+								if(count($mrows)>0){
+										foreach($mrows as $rows){
+											echo '<option value="'.$rows->id.'">'.$rows->stop_point.' ('.$rows->drop_time.')</option>';
+										}
+								}
+											
+							?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                	<td colspan="2	"><div class="form-group">
+                                                            <label class="col-lg-4 control-label">Mobile No.</label>
+                                                            <div class="col-lg-8"><input type="text" name="mobile" class="form-control"  value="" id="mobile" autocomplete="off"></div>
+                                                        </div>
+                                                         <div class="form-group">
+                                                            <label class="col-lg-4 control-label">Email ID</label>
+                                                            <div class="col-lg-8"><input type="text" name="email" class="form-control"  value="" id="email" autocomplete="off"></div>
+                                                        </div></td>
+                </tr>
+            </table>
+            <table class="table table-sm">
+            	<tr>
+                	<th style="width:80px;">Seat No.</th><th style="width:230px;">Name</th><th>Gender</th>
+                </tr>
+                <tr>
+                	<td colspan="3"><div id="seat_info">
 
+</div></td>
+                </tr>
+                <tr>
+                	<th colspan="2"><span class="pull-right">Base Fare <i  class="fa fa-inr">&nbsp;</i></span></th><td id="base_fare"></td>
+                </tr>
+                <tr>
+                	<th colspan="2"><span class="pull-right">GST (<?php echo $gst ;?>%)<input type="hidden" name="gst" id="gstval" value="<?php echo $gst ;?>"> <i  class="fa fa-inr">&nbsp;</i></span></th><td id="gst"></td>
+                </tr>
+                <tr>
+                	<th colspan="2"><span class="pull-right">Total Fare <i class="fa fa-inr">&nbsp;</i></span></th><td id="total_fare"></td>
+                </tr>
+                <tr><td colspan="3"><a href="<?php echo $request_url;?>" class="btn btn-primary">Back</a> 
+                <button type="button" id="confirm" class="btn btn-success pull-right">Confirm</button></td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+<input type="hidden" name="seats" class="book_seats">
+<input type="hidden" name="amount" class="amount"> 
+<?php
+$para = base64_encode($route_id."&".$gst."&".$id[1]."&".$id[4]);
+?>
+</form>
     <section id="contact" class="contact features-2">
         <div class="container text-center">
             <h2 class="text-primary reveal-top">Contact Us</h2><br>
@@ -171,7 +359,14 @@ $rdir = base64_decode($_GET['id']);
                 }
             });
         });
+		$("#confirm").click(function(){
+			$("#frmBooking").attr("method","post");
+			$("#frmBooking").attr("action","confirm_booking.php?action=<?php echo $para;?>");
+			$("#frmBooking").submit();
+			
+		});
     </script>
+    
 </body>
 
 </html>
